@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {v4 as uuidv4} from 'uuid'
+import {formatDistanceToNow} from 'date-fns'
 import CommentItem from '../CommentItem/index'
 import './index.css'
 
@@ -72,6 +73,7 @@ class Comments extends Component {
   }
 
   render() {
+    const timeDistance = formatDistanceToNow(new Date())
     const {userName, comment, commentList} = this.state
     const l = commentList.length
     return (
@@ -93,6 +95,7 @@ class Comments extends Component {
                 rows="10"
                 cols="40"
                 className="ip2"
+                placeholder="Your Comment"
                 onChange={this.onChangeComment}
               >
                 Your Comment
@@ -121,6 +124,8 @@ class Comments extends Component {
                 commentDetails={eachComment}
                 onDelete={this.onDelte}
                 onLike={this.onLike}
+                key={eachComment.id}
+                timeDistance={timeDistance}
               />
             ))}
           </ul>
